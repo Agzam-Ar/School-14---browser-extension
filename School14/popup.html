@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+
+        :root {
+            --gradient-color1: rgba(0,126,255,1);
+            --gradient-color2: rgba(0,255,191,1);
+            --bg-color1: #5c99fa;
+            --bg-color2: #436EB2;
+        }
+
+        .theme0 {
+            --gradient-color1: #007eff;
+            --gradient-color2: #00ffbf;
+            --bg-color1: #5c99fa;
+            --bg-color2: #436EB2;
+        }
+
+        .theme1 {
+            --gradient-color1: #ff00f5;
+            --gradient-color2: #007eff;
+            --bg-color1: #6d5cfa;
+            --bg-color2: #5943b2;
+        }
+
+        .theme2 {
+            --gradient-color1: #fb00ff;
+            --gradient-color2: #00ff7d;
+            --bg-color1: #36eeaa;
+            --bg-color2: #43b284;
+        }
+
+        .theme3 {
+            --gradient-color1: #ff00e0;
+            --gradient-color2: #fff; /*00ff95*/
+            --bg-color1: #ff00e0;
+            --bg-color2: #f390ff;
+        }
+
+        .theme4 {
+            --gradient-color1: #007eff;
+            --gradient-color2: #ffffff;
+            --bg-color1: #00adff;
+            --bg-color2: #90dbff;
+        }
+
+        .theme5 {
+            --gradient-color1: #111;
+            --gradient-color2: #333; /*00ff95*/
+            --bg-color1: #181818;
+            --bg-color2: #000;
+        }
+
+        .theme6 {
+            --gradient-color1: #999;
+            --gradient-color2: #FFF; /*00ff95*/
+            --bg-color1: #1e1e1e;
+            --bg-color2: #FFF;
+        }
+
+        .theme7 {
+            --gradient-color1: #C49D72;
+            --gradient-color2: #685244;
+            --bg-color1: #1D140F;
+            --bg-color2: #8A725A;
+        }
+
+        .theme8 {
+            --gradient-color1: #374665;
+            --gradient-color2: #0C303E;
+            --bg-color1: #000000;
+            --bg-color2: #000000;
+        }
+
+        .theme9 {
+            --gradient-color1: #00644F;
+            --gradient-color2: #004133;
+            --bg-color1: #191919;
+            --bg-color2: #2F2F2F;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
+            font-size: 75%;
+        }
+        html {
+            width: 250px;
+            background-image: linear-gradient(45deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 0px;
+            margin-top: 5px;
+        }
+
+        a {
+            padding: 3px 10px;
+            text-decoration: none;
+            text-align: center;
+            width: initial;
+            user-select: none;
+            transition: .1s ease-out;
+        }
+
+        a:hover {
+            color: #FFF;
+            background: #33333399;
+        }
+
+        h1, a {
+            display: block;
+            color: #EEE;
+            background: #00000099;
+            border-radius: 3px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            width: 50%;
+        }
+
+        line {
+            border-radius: 1px;
+            display: block;
+            width: 98%;
+            height: 2px;
+            background: #ffffffAA;
+            margin: 7px 1%;
+            box-shadow: 0px 0px 1px #00000055;
+        }
+
+        br {
+            display: block;
+            content: "";
+            margin: 2em;
+            font-size: 20%;
+        }
+
+        h6 {
+            display: block;
+            text-align: right;
+            width: 90%;
+            margin: 10px 5%;
+            color: #FFFFFF99;
+            user-select: none;
+
+        }
+
+        #pinned_msg {
+            display: block;
+            width: 90%;
+            margin: 10px 5%;
+        }
+
+        br2 {
+            display: block;
+            width: 100%;
+            height: 10px;
+        }
+
+
+        .changetheme {
+            cursor: pointer;
+            display: inline-block;
+            width: 8%;
+            height: 10px;
+            border-radius: 15px;
+            padding: 5px 0px;
+            text-decoration: none;
+            text-align: center;
+            user-select: none;
+            transition: .1s ease-out;
+            margin: calc((2% - 3px)/2);
+            background-image: linear-gradient(45deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+            border: #FFF 1.5px solid;
+            box-shadow: 0px 0px 10px 0px #000;
+        }
+
+        .changetheme:hover {
+            box-shadow: 0px 0px 10px 2px #000;
+        }
+
+        .changetheme2 {
+            cursor: pointer;
+            display: inline-block;
+            width: 7.5%;
+            height: 10px;
+            border-radius: 15px;
+            padding: 5px 0px;
+            text-decoration: none;
+            text-align: center;
+            user-select: none;
+            transition: .1s ease-out;
+            margin: 5px calc((2% - 3px)/2);
+            background-image: linear-gradient(45deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+            border: #FFF 1.5px solid;
+            box-shadow: 0px 0px 2px 0px #000;
+        }
+
+        .changetheme2:hover {
+            box-shadow: 0px 0px 3px 0px #000;
+        }
+
+
+        #theme0 {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+lesson.русский {
+    border-left: #a4ff8d 5px solid;
+}
+
+lesson.литература {
+    border-left: #00ffa0 5px solid;
+}
+
+lesson.алгебра {
+    border-left: #00c8ac 5px solid;
+}
+
+lesson.геометрия {
+    border-left: #673ab7 5px solid;
+}
+
+lesson.история {
+    border-left: #f44336 5px solid;
+}
+
+lesson.обществознание {
+    border-left: #009688 5px solid;
+}
+
+lesson.физика {
+    border-left: #FFF 5px solid;
+}
+
+lesson.биология {
+    border-left: #ff00a5 5px solid;
+}
+
+lesson.химия {
+    border-left: #41ff84 5px solid;
+}
+
+lesson.география {
+    border-left: #ff6535 5px solid;
+}
+
+lesson.английский {
+    border-left: #021db7 5px solid;
+}
+
+lesson.обж {
+    border-left: #607d8b 5px solid;
+}
+
+lesson.физкультура {
+    border-left: #333 5px solid;
+}
+
+lesson.информатика {
+    border-left: #ff00a5 5px solid;
+}
+
+lesson.немецкий  {
+    border-left: #afff72 5px solid;
+}
+
+lesson.факультатив  {
+    border-left: #333 5px solid;
+}
+
+lesson, emptyline {
+    display: block;
+    /*background: #edeef0;*/
+    color: #EEE;
+    background: #00000099;
+    padding: 2px 10px;
+    transition: .1s ease-out;
+    cursor: default;
+}
+
+lesson:hover {
+    background: #33333399;
+}
+
+.schedulehref {
+    display: block;
+    text-align: center;
+    font-size: 17px;
+    padding: 10px 10px 0px 10px;
+    color: #FFF;
+}
+
+.schedulehref:hover {
+    color: #FFF;
+}
+
+scheduledate {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    padding: 2px;
+    color: #FFF;
+    font-family: monospace;
+}
+
+schedulehead {
+    display: block;
+    background: var(--bg-color1); /*99a2ad*/
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: #fff 2px solid;
+}
+
+schedulebody {
+    display: block;
+    /*background: #edeef0;*/
+    border-radius: 0px 0px 5px 5px;
+    background: rgb(0,126,255);
+    background: rgb(0,126,255);
+    background-image: linear-gradient(45deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+    /*background-image: linear-gradient(to right, rgb(255, 107, 201), rgb(241, 115, 206), rgb(227, 123, 211), rgb(213, 131, 216), rgb(199, 139, 221), rgb(185, 147, 226), rgb(172, 154, 230), rgb(158, 162, 235), rgb(144, 170, 240), rgb(130, 178, 245), rgb(116, 186, 250), rgb(102, 194, 255));*/
+}
+
+schedule {
+    display: block;
+    background: var(--bg-color2); /*#5584b9;*/
+    border: #FFF 2px solid;
+    border-radius: 5px;
+    box-shadow: #000 0px 0px 10px 0px;
+}
+
+
+lesson:after {
+    opacity: 0;
+    transition: .2s ease-in-out .4s;
+}
+
+
+lesson:hover:after {
+    content: attr(data-name);
+    background: #EEEEEEEE;
+    color: #333;
+    font-family: monospace;
+    font-size: 14px;
+    text-padding: 5px 10px;
+    border-radius: 3px;
+    position: absolute;
+    white-space: pre;
+    display: block;
+    width: fit-content;
+    opacity: 1;
+    pointer-events: none;
+    cursor: default;
+}
+
+.schedulehide {
+    border-radius: 10px;
+    /*border: #fff 1px solid;*/
+    display: block;
+    background: #5C99FA;
+    color: #FFF;
+    content: "-";
+    text-align: center;
+    padding: 5px 10px;
+    transition: .2s ease-in-out;
+    user-select: none;
+}
+.schedulehide:hover {
+    background: #93BCF9;
+}
+
+scheduleclone {
+    display: block;
+    transition: .2s ease-in-out;
+}
+
+gradient {
+    /*color: #333;*/
+    display: block;
+    /*background: #FFF;*/
+    /*text-shadow: 0 0 1px #333;*/
+    box-shadow: 0 0 0.2rem #000000;
+    border-radius: 10px;
+    border: #EEE 2px solid;
+    background-image: linear-gradient(45deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+}
+
+textongradient {
+    display: block;
+    color: #EEE;
+    background: #00000099;
+    transition: .1s ease-out;
+    font-size: 11px;
+}
+
+aa {
+    color: #FFF !important;
+    line-height: 12.5px !important;
+    padding-bottom: 5px !important;
+    user-select: none;
+}
+
+textongradient > div {
+    margin: 0 !important;
+    padding: 5px 10px;
+}
+
+
+
+
+
+
+
+
+
+
+label  {
+
+    display: inline-block;
+    font-size: 15px;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    position: relative;
+    top: 0px;
+}
+
+input[type="checkbox"].switch_1:disabled {
+    filter: grayscale(1) brightness(1.1);
+    cursor: not-allowed;
+}
+
+label.disabled {
+    /*filter: grayscale(1) brightness(1.5);*/
+    color: #555;
+    user-select: none;
+}
+
+
+
+input[type="checkbox"].switch_1:checked {
+    background: #0ebeff;
+}
+
+input[type="checkbox"].switch_1 {
+    font-size: 30px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 15px;
+    background: #ddd;
+    border-radius: 30px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    margin: 0px 5px;
+    top: 2px;
+}
+
+input[type="checkbox"].switch_1:checked:after {
+    left: calc(100% - 15px);
+}
+
+input[type="checkbox"].switch_1:after {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 2.5px rgb(0 0 0 / 30%);
+    box-shadow: 0 0 2.5px rgb(0 0 0 / 30%);
+    -webkit-transform: scale(.7);
+    transform: scale(.7);
+    left: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+
+check {
+    display: block;
+    width: 100%;
+    background: #FFFFFFAA;
+    margin: 5px 0px;
+    box-shadow: 0px 1px 9px #0000006b;
+    border-top: #EEE 1px solid;
+    border-bottom: #EEE 1px solid;
+    font-weight: 300;
+    /*co*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.settings {
+    color: #333;
+    /*position: fixed;*/
+    display: inline-block;
+    width: 30%;
+    /*height: 20px;*/
+    top: 5px;
+    right: 5px;
+    border-radius: 20px;
+    background: #FFF;
+    padding: 2px 5px;
+    font-size: 100%;
+    box-shadow: 0px 1px 9px #0000006b;
+    /*margin: 0px 10%;*/
+}
+
+.settings:hover {
+    background: #BBB;
+}
+
+settingsbody {    
+    width: 100%;
+    height: 100%;
+    /*background: #FFF;*/
+    background-image: linear-gradient(45deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+    animation-fill-mode: backwards;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: .25s ease-out;
+}
+
+settingsline {
+    display: block;
+    background: #333;
+    width: 100%;
+    height: 15%;
+    border-radius: 10px;
+    margin: 13.75% 0px;
+}
+
+sb {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    width: 100%;
+}
+
+.full {
+    width: 99%;
+    padding: 3px 0px;
+}
+
+h2 {
+    text-align: center;
+    font-weight: bold;
+    font-weight: bold;
+    margin: -5px 0px 0px 0px;
+    padding: 10px;
+    user-select: none;
+}
+
+buttonk {
+    display: block;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 10px;
+}
+
+/*textongradient:hover {
+    background: #33333399;
+}*/
+
+    </style>
+    <script src="popup.js" type="text/javascript"></script>
+    <!-- <script src="styles.js" type="text/javascript"></script> -->
+    <!-- <script src="run.js" type="text/javascript"></script> -->
+</head>
+<body>
+    <h1>Школа №14</h1>
+    <line></line>
+    <table>
+        <tr>
+            <td>
+                <a class="full" href="http://diary-db.kirov.ru/sch14/" target="_blank">Журнал</a>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td><a class="rowel" href="https://www.14school.ru/" target="_blank">Школьный сайт</a></td>
+            <td><a class="rowel" id="settingsbutton">Настройки</a></td>
+        </tr>
+    </table>
+    <pinned id="pinned_msg"></pinned>
+    <h6>
+        by Agzam
+    </h6>
+    <br/>
+    <br2/>
+    <settingsbody id="settingsbody">
+        <check><h2>Настройки</h2></check>
+        <check><label class="disabled">
+                <input type="checkbox" class="switch_1" value="1" checked="checked" disabled="disabled"></input>Выделять Расписание
+        </label></check>
+        <check><label class="disabled">
+                <input type="checkbox" class="switch_1" value="1" checked="checked" disabled="disabled"></input>Выделять Факультативы
+        </label></check>
+        <br2></br2>
+        <check><h2>Тема</h2></check>
+        <check id="chngt"><label>
+                
+        </label></check>
+        <buttonk><a class="settings" id="back">Назад</a></buttonk>
+    </settingsbody>
+</body>
+</html>

@@ -1,0 +1,298 @@
+
+lesson.русский {
+	border-left: #a4ff8d 5px solid;
+}
+
+lesson.литература {
+	border-left: #00ffa0 5px solid;
+}
+
+lesson.алгебра {
+	border-left: #00c8ac 5px solid;
+}
+
+lesson.геометрия {
+	border-left: #673ab7 5px solid;
+}
+
+lesson.история {
+	border-left: #f44336 5px solid;
+}
+
+lesson.обществознание {
+	border-left: #009688 5px solid;
+}
+
+lesson.физика {
+	border-left: #FFF 5px solid;
+}
+
+lesson.биология {
+	border-left: #ff00a5 5px solid;
+}
+
+lesson.химия {
+	border-left: #41ff84 5px solid;
+}
+
+lesson.география {
+	border-left: #ff6535 5px solid;
+}
+
+lesson.английский {
+	border-left: #021db7 5px solid;
+}
+
+lesson.обж {
+	border-left: #607d8b 5px solid;
+}
+
+lesson.физкультура {
+	border-left: #333 5px solid;
+}
+
+lesson.информатика {
+	border-left: #ff00a5 5px solid;
+}
+
+lesson.немецкий  {
+	border-left: #afff72 5px solid;
+}
+
+lesson.факультатив  {
+	border-left: #333 5px solid;
+}
+
+lesson, emptyline {
+    display: block;
+    /*background: #edeef0;*/
+    color: #EEE;
+    background: #00000099;
+    padding: 2px 10px;
+  	transition: .1s ease-out;
+}
+
+lesson:hover {
+    background: #33333399;
+}
+
+.schedulehref {
+    display: block;
+    text-align: center;
+    font-size: 17px;
+    padding: 10px 10px 0px 10px;
+    color: #FFF;
+}
+
+.schedulehref:hover {
+    color: #FFF;
+}
+
+scheduledate {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+    padding: 2px;
+    color: #FFF;
+    font-family: monospace;
+}
+
+schedulehead {
+    display: block;
+	background: var(--bg-color1); /*99a2ad*/
+	border-radius: 5px 5px 0px 0px;
+	border-bottom: #fff 2px solid;
+}
+
+schedulebody {
+    display: block;
+	/*background: #edeef0;*/
+	border-radius: 0px 0px 5px 5px;
+	background: rgb(0,126,255);
+	background: rgb(0,126,255);
+    background-image: linear-gradient(45deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+	/*background-image: linear-gradient(to right, rgb(255, 107, 201), rgb(241, 115, 206), rgb(227, 123, 211), rgb(213, 131, 216), rgb(199, 139, 221), rgb(185, 147, 226), rgb(172, 154, 230), rgb(158, 162, 235), rgb(144, 170, 240), rgb(130, 178, 245), rgb(116, 186, 250), rgb(102, 194, 255));*/
+}
+
+schedule {
+	display: block;
+	background: var(--bg-color2); /*#5584b9;*/
+    border: #FFF 2px solid;
+    border-radius: 5px;
+    box-shadow: #000 0px 0px 20px 0px;
+}
+
+
+lesson:after {
+	opacity: 0;
+  	transition: .2s ease-in-out .4s;
+}
+
+
+lesson:hover:after {
+	content: attr(data-name);
+	background: #EEEEEEEE;
+	color: #333;
+	font-family: monospace;
+	font-size: 14px;
+	text-padding: 5px 10px;
+  	border-radius: 3px;
+  	position: absolute;
+    white-space: pre;
+    display: block;
+    width: fit-content;
+	opacity: 1;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.schedulehide {
+	border-radius: 10px;
+	/*border: #fff 1px solid;*/
+	display: block;
+	background: #5C99FA;
+	color: #FFF;
+	content: "-";
+    text-align: center;
+	padding: 5px 10px;
+  	transition: .2s ease-in-out;
+  	user-select: none;
+}
+.schedulehide:hover {
+	background: #93BCF9;
+}
+
+scheduleclone {
+    display: block;
+  	transition: .2s ease-in-out;
+}
+
+gradient {
+	/*color: #333;*/
+	display: block;
+	/*background: #FFF;*/
+    /*text-shadow: 0 0 1px #333;*/
+    box-shadow: 0 0 0.2rem #000000;
+    border-radius: 10px;
+    border: #EEE 2px solid;
+    background-image: linear-gradient(45deg, var(--gradient-color1) 0%, var(--gradient-color2) 100%);
+}
+
+textongradient {
+    display: block;
+    color: #EEE;
+    background: #00000099;
+  	transition: .1s ease-out;
+  	font-size: 11px;
+}
+
+textongradient > div > a , aa {
+    color: #AEF !important;
+  	line-height: 12.5px !important;
+}
+
+textongradient > div {
+    margin: 0 !important;
+	padding: 5px 10px;
+}
+
+
+
+/*textongradient:hover {
+    background: #33333399;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		:root {
+            --gradient-color1: rgba(0,126,255,1);
+            --gradient-color2: rgba(0,255,191,1);
+            --bg-color1: #5c99fa;
+            --bg-color2: #436EB2;
+        }
+
+        .theme0 {
+            --gradient-color1: #007eff;
+            --gradient-color2: #00ffbf;
+            --bg-color1: #5c99fa;
+            --bg-color2: #436EB2;
+        }
+
+        .theme1 {
+            --gradient-color1: #ff00f5;
+            --gradient-color2: #007eff;
+            --bg-color1: #6d5cfa;
+            --bg-color2: #5943b2;
+        }
+
+        .theme2 {
+            --gradient-color1: #00ff7d;
+            --gradient-color2: #fb00ff;
+            --bg-color1: #36eeaa;
+            --bg-color2: #43b284;
+        }
+
+        .theme3 {
+            --gradient-color1: #ff00e0;
+            --gradient-color2: #fff; /*00ff95*/
+            --bg-color1: #ff00e0;
+            --bg-color2: #f390ff;
+        }
+
+        .theme4 {
+            --gradient-color1: #007eff;
+            --gradient-color2: #ffffff;
+            --bg-color1: #00adff;
+            --bg-color2: #90dbff;
+        }
+
+        .theme5 {
+            --gradient-color1: #111;
+            --gradient-color2: #333; /*00ff95*/
+            --bg-color1: #181818;
+            --bg-color2: #000;
+        }
+
+
+        .theme6 {
+            --gradient-color1: #999;
+            --gradient-color2: #FFF; /*00ff95*/
+            --bg-color1: #1e1e1e;
+            --bg-color2: #FFF;
+        }
+
+        .theme7 {
+            --gradient-color1: #C49D72;
+            --gradient-color2: #685244;
+            --bg-color1: #1D140F;
+            --bg-color2: #8A725A;
+        }
+
+        .theme8 {
+            --gradient-color1: #374665;
+            --gradient-color2: #0C303E;
+            --bg-color1: #000000;
+            --bg-color2: #000000;
+        }
+
+        .theme9 {
+            --gradient-color1: #00644F;
+            --gradient-color2: #004133;
+            --bg-color1: #191919;
+            --bg-color2: #2F2F2F;
+        }
