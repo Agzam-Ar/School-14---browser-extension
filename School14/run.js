@@ -98,6 +98,7 @@ window.onload = function () {
     }
     if(!isVk)
         return;
+
     setInterval(go, 1000 / 50);
 
 
@@ -162,7 +163,6 @@ function go() {
 }
 
 function createSchedule(msg) {
-    
     let isPinned = msg.parentElement.classList.contains("_im_mess_pinned");
     let txt = msg.innerText;
     if(msg.innerText.indexOf("NEW$DATA%") != -1) {
@@ -177,7 +177,12 @@ function createSchedule(msg) {
         msg.innerText = "<data>";
         msg.style.color = '#999';
         msg.style.fontFamily = 'monospace';
-    }else if(msg.innerText.indexOf(tagr) != -1) {
+    }else if(msg.innerText.indexOf(tagr) != -1 && tagr != undefined) {
+        let edits = msg.getElementsByClassName('im-mess--lbl-was-edited _im_edit_time');
+        for (var i = 0; i < edits.length; i++) {
+           edits[i].innerText = "";
+        }
+        txt = msg.innerText;
         let lines = txt.split('\n');
         let schedule = document.createElement('schedule');
         console.log(txt);
@@ -246,6 +251,12 @@ function createSchedule(msg) {
     } else if(msg.innerText.indexOf("tagf") != -1 
         && !msg.classList.contains("textongradientused")
         && !msg.parentElement.classList.contains("textongradientused")) {
+        let edits = msg.getElementsByClassName('im-mess--lbl-was-edited _im_edit_time');
+        for (var i = 0; i < edits.length; i++) {
+           edits[i].innerText = "";
+        }
+        txt = msg.innerText;
+
         msg.parentElement.className = msg.parentElement.classList + " optionalcourse textongradientused";
 
         let gradient = document.createElement('gradient');
