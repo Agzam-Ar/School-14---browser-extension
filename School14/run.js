@@ -13,7 +13,86 @@ if(!isVk) {
     isShowed = true;
 }
 
+let tagr = "#Расписание";
+let tagf = "#Факультатив";
+
+let les = ["русский", "литература",  "алгебра", "геометрия", "история", "обществознание", "физика", "биология", "химия",   "география", "английский", "информатика", "немецкий"];
+let tip = ["y,t,p",   "y,t,p",       "y,t,p,d",  "y,t,p,d",    "y,t,r",   "y,t,r",          "y,l,t",  "y,t",      "y,t,q,s", "y,t,k",     "y,t,r",      "y,t",         "y,t"];
+let abr = [',','y','t','p','l','d','r','q','s','k'];
+let replaseOn = ['\n','Учебник','Тетрадь','Памятка','Лукашик','Дидактические материалы ','Рабочая тетрадь ','Таблица','Схема','Карты'];
+
+/*
+
+                    let tipp = tip[ind].replaceAll(",", " \n");
+                    tipp = tipp.replaceAll("y", " Учебник");
+                    tipp = tipp.replaceAll("t", " Тетрадь");
+                    tipp = tipp.replaceAll("p", " Памятка");
+                    tipp = tipp.replaceAll("l", " Лукашик");
+                    tipp = tipp.replaceAll("d", " Дидактические материалы ");
+                    tipp = tipp.replaceAll("r", " Рабочая тетрадь ");
+                    tipp = tipp.replaceAll("q", " Таблица");
+                    tipp = tipp.replaceAll("s", " Схема");
+                    tipp = tipp.replaceAll("k", " Карты");
+
+*/
+
+function loadData(data) {
+    console.log("Loading data: " + data);
+    if(data == undefined)
+        return;
+    let dataLines = data.replaceAll('\\n','\n').split(';');
+
+    // Tags
+    let tags = dataLines[0].split('&');
+    tagr = tags[0];
+    tagf = tags[1];
+    console.log(tagr + "\n" + tagf);
+
+    // Tips
+    les = dataLines[1].split('&');
+    tip = dataLines[2].split('&');
+    console.log(les + "\n" + tip);
+
+    // Deshift
+    abr = dataLines[3].split('&');
+    replaseOn = dataLines[4].split('&');
+    console.log(abr + "\n" + replaseOn);
+}
+
+function loadDataFromStorage() {
+    chrome.storage.local.get("school14data", function(items) {
+        if (!chrome.runtime.error) {
+            console.log("Loading data from storage.local: ");
+            if(items.school14data == undefined){
+                 loadData('#Расписание&#Факультатив;русский&литература&алгебра&геометрия&история&обществознание&физика&биология&химия&география&английский&информатика&немецкий;y,t,p&y,t,p&y,t,p,d&y,t,p,d&y,t,r&y,t,r&y,l,t&y,t&y,t,q,s&y,t,k&y,t,r&y,t&y,t;,&y&t&p&l&d&r&q&s&k;\n&Учебник&Тетрадь&Памятка&Лукашик&Дидактические материалы &Рабочая тетрадь &Таблица&Схема&Карты');
+            }else {
+                loadData(items.school14data);
+            }
+        }
+    });
+}
+
 window.onload = function () {
+    // Update data
+    // console.log("Updating data...");
+    // try {
+    //     var client = new XMLHttpRequest();
+    //     client.onreadystatechange = handleStateChange;
+    //     client.open('GET', 'https://raw.githubusercontent.com/Agzam-Ar/School-14---browser-extension/main/School14-Data/data.txt', true);
+    //     client.send(null);
+    //     if (client.status == 200) {
+    //         loadData(client.responseText);
+    //         chrome.storage.local.set({"school14data": data}, function() {
+    //             console.log("Setting data: " + data);
+    //         });
+    //     }else {
+    //         console.log("client.status: " + client.status);
+    loadDataFromStorage();
+    //     }
+    // } catch (err) {
+    //     console.log("Err: " + err);
+    // }
+
     if(isReadMe) {
         setInterval(go, 1000 / 50);
     }
@@ -83,12 +162,22 @@ function go() {
 }
 
 function createSchedule(msg) {
-    let les = ["русский", "литература",  "алгебра", "геометрия", "история", "обществознание", "физика", "биология", "химия",   "география", "английский", "информатика", "немецкий"];
-    let tip = ["y,t,p",   "y,t,p",       "y,t,p,d",  "y,t,p,d",    "y,t,r",   "y,t,r",          "y,l,t",  "y,t",      "y,t,q,s", "y,t,k",     "y,t,r",      "y,t",         "y,t"];
-
+    
     let isPinned = msg.parentElement.classList.contains("_im_mess_pinned");
     let txt = msg.innerText;
-    if(msg.innerText.indexOf("#Расписание") != -1) {
+    if(msg.innerText.indexOf("NEW$DATA%") != -1) {
+        // Save Data To chrome storage
+        let edits = msg.getElementsByClassName('im-mess--lbl-was-edited _im_edit_time');
+        for (var i = 0; i < edits.length; i++) {
+           edits[i].innerText = "";
+        }
+        console.log("New Data: " + msg.innerText.replaceAll('NEW$DATA%', ''));
+        chrome.storage.local.set({"school14data": msg.innerText.replaceAll('NEW$DATA%', '')}, function() {});
+        loadData(msg.innerText.replaceAll('NEW$DATA%', ''));
+        msg.innerText = "<data>";
+        msg.style.color = '#999';
+        msg.style.fontFamily = 'monospace';
+    }else if(msg.innerText.indexOf(tagr) != -1) {
         let lines = txt.split('\n');
         let schedule = document.createElement('schedule');
         console.log(txt);
@@ -102,7 +191,7 @@ function createSchedule(msg) {
 
         // Date
         let date = document.createElement('scheduledate');
-        date.innerText = lines[0].replaceAll('#Расписание', '');
+        date.innerText = lines[0].replaceAll(tagr, '');
 
 
         // Schedule Head
@@ -119,38 +208,29 @@ function createSchedule(msg) {
         for (var i = 1; i < lines.length; i++) {
             let line = lines[i];
             let data = line.split(" ");
-            if(data[0] != undefined) {
-                // if(data[0].toLowerCase().toUpperCase() == data[0]) {
-                let lesson = document.createElement(line == "" ? 'emptyline' : 'lesson');
-                if(data[1] != undefined)
+            let lesson = document.createElement(line == "" ? 'emptyline' : 'lesson');
+            if(data[1] != undefined){
                 lesson.className = data[1].toLowerCase();
-                lesson.innerText = line;
-                if(data[1] != undefined){
+            }
+            lesson.innerText = line;
+            if(data[1] != undefined){
                 let ind = les.indexOf(data[1].toLowerCase());
-                if(ind != -1){
-                    let tipp = tip[ind].replaceAll(",", " \n");
-                    tipp = tipp.replaceAll("y", " Учебник");
-                    tipp = tipp.replaceAll("t", " Тетрадь");
-                    tipp = tipp.replaceAll("p", " Памятка");
-                    tipp = tipp.replaceAll("l", " Лукашик");
-                    tipp = tipp.replaceAll("d", " Дидактические материалы ");
-                    tipp = tipp.replaceAll("r", " Рабочая тетрадь ");
-                    tipp = tipp.replaceAll("q", " Таблица");
-                    tipp = tipp.replaceAll("s", " Схема");
-                    tipp = tipp.replaceAll("k", " Карты");
+                if(ind != -1) {
+                    let tipp = tip[ind];
+                    for (var j = 0; j < abr.length; j++) {
+                        tipp = tipp.replaceAll(abr[j], " " + replaseOn[j]);
+                    }
                     lesson.setAttribute('data-name', tipp); 
                 }
             }
             schedulebody.append(lesson);
-            // }
         }
-    }
-    schedulebody.append(document.createElement('br'));
+        schedulebody.append(document.createElement('br'));
 
-            msg.innerText = "";
-            msg.append(schedule);
+        msg.innerText = "";
+        msg.append(schedule);
 
-            if(isPinned){
+        if(isPinned) {
                 // let clone = schedule.cloneNode(true);
                 // clone.style.boxShadow = "#000 0px 0px 5px 0px";
                 // clone.style.zIndex = 999;
@@ -158,34 +238,30 @@ function createSchedule(msg) {
                 // scheduleclone.innerText = "";
                 // scheduleclone.append(clone);
 
-                console.log('Value to set: ' + txt);
-                chrome.storage.sync.set({"pinned_msg": txt}, function() {
-                    console.log('Value is set to ' + txt);
-                });
-            }
-        } else if(msg.innerText.indexOf("#Факультатив") != -1 
-            && !msg.classList.contains("textongradientused")
-            && !msg.parentElement.classList.contains("textongradientused")) {
-            msg.parentElement.className = msg.parentElement.classList + " optionalcourse textongradientused";
-
-            let gradient = document.createElement('gradient');
-            let textongradient = document.createElement('textongradient');
-            gradient.append(document.createElement('br'));
-            gradient.append(textongradient);
-            gradient.append(document.createElement('br'));
-
-            let inclone = msg.cloneNode(true);
-            textongradient.append(inclone);
-            inclone.className = inclone.classList + " textongradientused";
-            textongradient.append(inclone);
-
-            msg.innerText = "";
-            msg.append(gradient);
-
-            // msg.parentElement.style.border = "#333 1px solid";
-            // msg.parentElement.style.boxShadow = "0 0 7px #333333c7";
+            console.log('Value to set: ' + txt);
+            chrome.storage.sync.set({"pinned_msg": txt}, function() {
+                console.log('Value is set to ' + txt);
+            });
         }
+    } else if(msg.innerText.indexOf("tagf") != -1 
+        && !msg.classList.contains("textongradientused")
+        && !msg.parentElement.classList.contains("textongradientused")) {
+        msg.parentElement.className = msg.parentElement.classList + " optionalcourse textongradientused";
 
+        let gradient = document.createElement('gradient');
+        let textongradient = document.createElement('textongradient');
+        gradient.append(document.createElement('br'));
+        gradient.append(textongradient);
+        gradient.append(document.createElement('br'));
+
+        let inclone = msg.cloneNode(true);
+        textongradient.append(inclone);
+        inclone.className = inclone.classList + " textongradientused";
+        textongradient.append(inclone);
+
+        msg.innerText = "";
+        msg.append(gradient);
+    }
 }
 
 // module.exports = {

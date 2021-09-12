@@ -1,17 +1,46 @@
-let gradientColor1 = [
-    '#ff00f5',
-    '#ff00f5',
-    '#007eff'
-];
+let tagr = "#Расписание";
+let tagf = "#Факультатив";
 
-let gradientColor2 = [
-    '#007eff',
-    '#b600ff',
-    '#b600ff'
-];
+let les = ["русский", "литература",  "алгебра", "геометрия", "история", "обществознание", "физика", "биология", "химия",   "география", "английский", "информатика", "немецкий"];
+let tip = ["y,t,p",   "y,t,p",       "y,t,p,d",  "y,t,p,d",    "y,t,r",   "y,t,r",          "y,l,t",  "y,t",      "y,t,q,s", "y,t,k",     "y,t,r",      "y,t",         "y,t"];
+let abr = [',','y','t','p','l','d','r','q','s','k'];
+let replaseOn = ['\n','Учебник','Тетрадь','Памятка','Лукашик','Дидактические материалы ','Рабочая тетрадь ','Таблица','Схема','Карты'];
 
+
+function loadDataFromStorage() {
+    chrome.storage.local.get("school14data", function(items) {
+        if (!chrome.runtime.error) {
+            loadData(items.school14data);
+        }
+    });
+}
+
+function loadData(data) {
+    console.log("Loading data: " + data);
+    if(data == undefined)
+        return;
+    let dataLines = data.replaceAll('\\n','\n').split(';');
+
+    // Tags
+    let tags = dataLines[0].split('&');
+    tagr = tags[0];
+    tagf = tags[1];
+    console.log(tagr + "\n" + tagf);
+
+    // Tips
+    les = dataLines[1].split('&');
+    tip = dataLines[2].split('&');
+    console.log(les + "\n" + tip);
+
+    // Deshift
+    abr = dataLines[3].split('&');
+    replaseOn = dataLines[4].split('&');
+    console.log(abr + "\n" + replaseOn);
+}
 
 let isSettingsOpen = false;
+
+loadDataFromStorage();
 
  chrome.storage.local.get("theme14", function(items) {
         if (!chrome.runtime.error) {
@@ -82,13 +111,14 @@ let isSettingsOpen = false;
 
 
 
+
+
+
 function createSchedule(msg) {
     console.log("Creating element");
-    let les = ["русский", "литература",  "алгебра", "геометрия", "история", "обществознание", "физика", "биология", "химия",   "география", "английский", "информатика", "немецкий"];
-    let tip = ["y,t,p",   "y,t,p",       "y,t,p,d",  "y,t,p,d",    "y,t,r",   "y,t,r",          "y,l,t",  "y,t",      "y,t,q,s", "y,t,k",     "y,t,r",      "y,t",         "y,t"];
 
     let txt = msg.innerText;
-    if(msg.innerText.indexOf("#Расписание") != -1) {
+    if(msg.innerText.indexOf(tagr) != -1) {
         let lines = txt.split('\n');
         let schedule = document.createElement('schedule');
         console.log(txt);
@@ -97,12 +127,12 @@ function createSchedule(msg) {
         let href = document.createElement('aa');//msg.getElementsByTagName('a')[0];
         if(href != undefined ) {
             href.className = "schedulehref";
-            href.innerText = "Расписание";
+            href.innerText = tagr.replaceAll('#', '');
         }
 
         // Date
         let date = document.createElement('scheduledate');
-        date.innerText = lines[0].replaceAll('#Расписание', '');
+        date.innerText = lines[0].replaceAll(tagr, '');
 
 
         // Schedule Head
@@ -127,16 +157,10 @@ function createSchedule(msg) {
                 if(data[1] != undefined) {
                     let ind = les.indexOf(data[1].toLowerCase());
                     if(ind != -1){
-                        let tipp = tip[ind].replaceAll(",", " \n");
-                        tipp = tipp.replaceAll("y", " Учебник");
-                        tipp = tipp.replaceAll("t", " Тетрадь");
-                        tipp = tipp.replaceAll("p", " Памятка");
-                        tipp = tipp.replaceAll("l", " Лукашик");
-                        tipp = tipp.replaceAll("d", " Дидактические материалы ");
-                        tipp = tipp.replaceAll("r", " Рабочая тетрадь ");
-                        tipp = tipp.replaceAll("q", " Таблица");
-                        tipp = tipp.replaceAll("s", " Схема");
-                        tipp = tipp.replaceAll("k", " Карты");
+                        let tipp = tip[ind];
+                        for (var j = 0; j < abr.length; j++) {
+                            tipp = tipp.replaceAll(abr[j], " " + replaseOn[j]);
+                        }
                         lesson.setAttribute('data-name', tipp); 
                     }
                 }
