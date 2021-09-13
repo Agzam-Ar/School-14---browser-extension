@@ -174,7 +174,7 @@ function createSchedule(msg) {
         console.log("New Data: " + msg.innerText.replaceAll('NEW$DATA%', ''));
         chrome.storage.local.set({"school14data": msg.innerText.replaceAll('NEW$DATA%', '')}, function() {});
         loadData(msg.innerText.replaceAll('NEW$DATA%', ''));
-        msg.innerText = "<data>";
+        msg.innerText = "Delete this message";
         msg.style.color = '#999';
         msg.style.fontFamily = 'monospace';
     }else if(msg.innerText.indexOf(tagr) != -1 && tagr != undefined) {
